@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/07/23 16:42:40 by svereten         ###   ########.fr        #
+#    Updated: 2024/07/23 18:38:38 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -48,6 +48,7 @@ fclean: clean
 
 re: fclean all
 
-runners: ${RUNNERS}
+runners:
+	@echo ${MAKECMDGOALS}
 
 .PHONY: all clean fclean re
