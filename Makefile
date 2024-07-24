@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/07/23 18:38:38 by svereten         ###   ########.fr        #
+#    Updated: 2024/07/24 19:29:04 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -15,6 +15,7 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
 INCLUDE = -I./include
+PROJECT_INCLUDE = -I../include
 
 SRCS_DIR = src
 OBJS_DIR = obj
@@ -22,6 +23,9 @@ RUNNERS_DIR = ../run
 TESTS_DIR = ../tests
 
 SRCS = asserts/assert_int_equal
+
+PROJECT_OBJS = ${filter-out ../obj/main.o, ${patsubst ../src/%.c, ../obj/%.o, ${wildcard ../src/*.c}}}
+TESTS_OBJS = ${patsubst ../tests/%.c, ../obj/%.o, ${wildcard ../tests/*.c}}
 
 OBJS = ${SRCS:%=${OBJS_DIR}/%.o}
 
@@ -48,6 +52,25 @@ fclean: clean
 
 re: fclean all
 
+../obj/%_tests.o: ${TESTS_DIR}/%_tests.c | ../obj
+	${CC} ${CFLAGS} ${INCLUDE} ${PROJECT_INCLUDE} -c $< -o $@
+
+../obj/%.o:
+	${MAKE} -C ../ obj/$*.o
+
+${RUNNERS_DIR}/%: ../obj/%.o ${PROJECT_OBJS} ${NAME} | ${RUNNERS_DIR}
+	${CC} ${CFLAGS} ${PROJECT_INCLUDE} ${INCLUDE} $^ -o $@
+	
+${RUNNERS_DIR}:
+	mkdir -p $@
+
+../obj:
+	mkdir -p $@
+
+print:
+	@echo ${PROJECT_OBJS} ${TESTS_OBJS}
+
+#${RUNNERS_DIR}/%: ${TESTS_DIR}
 runners:
 	@echo ${MAKECMDGOALS}
 
