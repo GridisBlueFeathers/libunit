@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/07/24 19:29:04 by svereten         ###   ########.fr        #
+#    Updated: 2024/07/26 02:01:34 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -14,7 +14,7 @@ NAME = libunit.a
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
-INCLUDE = -I./include
+INCLUDE = -I./include -I./libft/include
 PROJECT_INCLUDE = -I../include
 
 SRCS_DIR = src
