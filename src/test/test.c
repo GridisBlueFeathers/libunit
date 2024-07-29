@@ -3,7 +3,10 @@
 void	test(void (*test_case)(void), char *desc)
 {
 	assert_state_reset();
-	printf("%s\n", desc);
+	printf("Testing: %s\n", desc);
 	test_case();
-	assert_state_list_print();
+	printf("\n");
+	if (assert_state_get()->head)
+		assert_state_list_print();
+	printf("\n\n");
 }

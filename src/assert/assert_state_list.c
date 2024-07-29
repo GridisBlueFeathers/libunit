@@ -56,9 +56,7 @@ void	assert_state_list_print()
 	t_assert_node	*cur;
 	t_assert_node	*temp;
 
-	printf("\n");
-	if (!state->head)
-		return ;
+	printf("Errors:\n");
 	cur = state->head;
 	while (cur)
 	{

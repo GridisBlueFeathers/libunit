@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/07/29 16:18:50 by svereten         ###   ########.fr        #
+#    Updated: 2024/07/29 17:32:50 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -28,6 +28,8 @@ SRCS = assert/assert \
 	   assert/assert_state_free \
 	   assert/assert_state_list \
 	   test/test \
+	   start_up \
+	   teardown \
 
 PROJECT_OBJS = ${filter-out ../obj/main.o, ${patsubst ../src/%.c, ../obj/%.o, ${wildcard ../src/*.c}}}
 TESTS_OBJS = ${patsubst ../tests/%.c, ../obj/%.o, ${wildcard ../tests/*.c}}
