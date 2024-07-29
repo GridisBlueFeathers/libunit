@@ -1,21 +1,5 @@
 #include "libunit/assert.h"
 
-void	assert_state_node_free(t_assert_node *node)
-{
-	switch (node->type)
-	{
-		case RESET:
-		case INT_EQUAL:
-			break ;
-		case STR_EQUAL:
-			free(((char *)node->data->res));
-		case STR_ARR_EQUAL:
-			break ;
-	}
-	free(node->data);
-	free(node);
-}
-
 void	assert_state_reset()
 {
 	t_assert_state *state = assert_state_get();
@@ -30,14 +14,6 @@ void	assert_state_reset()
 		state->head = state->tail;
 	}
 	state->fail_amount = 0;
-}
-
-void	assert_state_free()
-{
-	t_assert_state *state = assert_state_get();
-
-	assert_state_reset();
-	free(state);
 }
 
 t_assert_state *assert_state_init()
