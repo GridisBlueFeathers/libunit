@@ -1,3 +1,3 @@
 #!/bin/bash
 
-run-parts run
+find ../run -executable -type f -exec '{}' ';'
