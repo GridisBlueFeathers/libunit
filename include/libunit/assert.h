@@ -24,6 +24,12 @@ typedef struct s_assert_data_int
 	int	res;
 }	t_assert_data_int;
 
+typedef struct s_assert_data_str_arr
+{
+	char **exp;
+	char **res;
+}	t_assert_data_str_arr;
+
 typedef struct s_assert_node
 {
 
@@ -55,5 +61,7 @@ t_assert_state	*assert_state_get();
 void				assert_int_equal(t_assert_data *data);
 t_assert_data_int	*assert_int_equal_data_dup(t_assert_data *data);
 void				assert_int_equal_node_print(t_assert_node *node);
+
+void	assert_str_arr_equal(t_assert_data *data);
 
 #endif
