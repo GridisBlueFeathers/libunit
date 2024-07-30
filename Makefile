@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/07/29 17:32:50 by svereten         ###   ########.fr        #
+#    Updated: 2024/07/30 15:43:53 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -19,6 +19,7 @@ PROJECT_INCLUDE = -I../include
 
 SRCS_DIR = src
 OBJS_DIR = obj
+LIBFT_DIR = libft
 RUNNERS_DIR = ../run
 TESTS_DIR = ../tests
 
@@ -31,12 +32,15 @@ SRCS = assert/assert \
 	   start_up \
 	   teardown \
 
-PROJECT_OBJS = ${filter-out ../obj/main.o, ${patsubst ../src/%.c, ../obj/%.o, ${wildcard ../src/*.c}}}
+PROJECT_OBJS = ${filter-out ../obj/dev/dev.o ../obj/main.o, ${patsubst ../src/%.c, ../obj/%.o, ${shell find ../src/ -type f -name "*.c"}}}
 TESTS_OBJS = ${patsubst ../tests/%.c, ../obj/%.o, ${wildcard ../tests/*.c}}
 
 OBJS = ${SRCS:%=${OBJS_DIR}/%.o}
 
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
+RUNNERS_DIRS = ${sort ${dir ${patsubst ../tests/%.c, ../run/%, ${shell find ../tests/ -type f -name "*.c"}}}}
+
+LIBFT = ${LIBFT_DIR}/libft.a
 
 AR = ar -rsc
 
@@ -59,26 +63,25 @@ fclean: clean
 
 re: fclean all
 
+${LIBFT}:
+	${MAKE} -C ${LIBFT_DIR}
+
 ../obj/%_tests.o: ${TESTS_DIR}/%_tests.c | ../obj
 	${CC} ${CFLAGS} ${INCLUDE} ${PROJECT_INCLUDE} -c $< -o $@
 
 ../obj/%.o:
 	${MAKE} -C ../ obj/$*.o
 
-${RUNNERS_DIR}/%: ../obj/%.o ${PROJECT_OBJS} ${NAME} | ${RUNNERS_DIR}
+${RUNNERS_DIR}/%: ../obj/%.o ${PROJECT_OBJS} ${NAME} ${LIBFT} | ${RUNNERS_DIRS}
 	${CC} ${CFLAGS} ${PROJECT_INCLUDE} ${INCLUDE} $^ -o $@
 	
-${RUNNERS_DIR}:
+${RUNNERS_DIRS}:
 	mkdir -p $@
 
 ../obj:
 	mkdir -p $@
 
 print:
-	@echo ${PROJECT_OBJS} ${TESTS_OBJS}
-
-#${RUNNERS_DIR}/%: ${TESTS_DIR}
-runners:
-	@echo ${MAKECMDGOALS}
+	@echo ${RUNNERS_DIR}
 
 .PHONY: all clean fclean re
