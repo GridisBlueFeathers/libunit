@@ -2,20 +2,11 @@
 #include "libft/color.h"
 #include "libft/libft.h"
 
-void	assert_str_err_equal_data_free(t_assert_data_str_arr *data)
+void	assert_str_arr_equal_data_free(t_assert_data_str_arr *data)
 {
 	int i = 0;
-	while (data->exp[i]) {
-		free(data->exp[i]);
-		i++;
-	}
-	i = 0;
-	while (data->res[i]) {
-		free(data->res[i]);
-		i++;
-	}
-	free(data->exp);
-	free(data->res);
+	ft_free(STR_ARR, data->res);
+	ft_free(STR_ARR, data->exp);
 	free(data);
 }
 
@@ -39,36 +30,45 @@ t_assert_data_str_arr	*assert_str_arr_equal_data_dup(t_assert_data *data)
 	res->exp = (char **)calloc(exp_arr_len, sizeof(char *));
 	res->res = (char **)calloc(res_arr_len, sizeof(char *));
 	if (!res->exp || !res->res)
-		return (NULL);
+		return (assert_str_arr_equal_data_free(res), NULL);
 	i = 0;
 	while (((char **)data->exp)[i]) {
 		res->exp[i] = ft_strdup(((char **)data->exp)[i]);
 		if (!res->exp[i])
-			return (NULL);
+			return (assert_str_arr_equal_data_free(res), NULL);
 		i++;
 	}
 	i = 0;
 	while (((char **)data->res)[i]) {
 		res->res[i] = ft_strdup(((char **)data->res)[i]);
 		if (!res->res[i])
-			return (NULL);
+			return (assert_str_arr_equal_data_free(res), NULL);
 		i++;
 	}
 
 	return (res);
 }
 
-void	assert_int_equal_node_print(t_assert_node *node)
-{
-	int exp = ((t_assert_data_int *)node->data)->exp;
-	int res = ((t_assert_data_int *)node->data)->res;
-
-	printf("%d. %d is not equal %d\n", node->label, res, exp);
-}
-
 void	assert_str_arr_equal_node_print(t_assert_node *node)
 {
 	char **exp = ((t_assert_data_str_arr *)node->data)->exp;
+	char **res = ((t_assert_data_str_arr *)node->data)->res;
+
+	printf("{");
+	int i = 0;
+	while (res[i + 1])
+	{
+		printf("\"%s\", ", res[i]);
+		i++;
+	}
+	printf("\"%s\"} is not equal", res[i]);
+	i = 0;
+	while (exp[i + 1])
+	{
+		printf("\"%s\", ", exp[i]);
+		i++;
+	}
+	printf("\"%s\"}\n", exp[i]);
 }
 
 void	assert_str_arr_equal(t_assert_data *data)
