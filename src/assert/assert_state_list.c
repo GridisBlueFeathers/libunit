@@ -7,7 +7,7 @@ void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
 	switch(type)
 	{
 		case INT_EQUAL:
-			res = (void *)assert_int_equal_data_dup(data);
+			res = (void *)assert_int_data_dup(data);
 			break ;
 		case STR_EQUAL:
 			res = NULL;
