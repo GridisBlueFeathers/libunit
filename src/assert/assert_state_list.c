@@ -1,5 +1,8 @@
 #include "libunit/assert.h"
 
+/**
+ * Duplicates data to display it later
+ */
 void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
 {
 	void	*res;
@@ -19,6 +22,9 @@ void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
 	return (res);
 }
 
+/**
+ * Adds new node to the state list and puts it to the end
+ */
 void assert_state_list_append(t_assert_type type, t_assert_data *data, int label)
 {
 	t_assert_node	*new;
@@ -50,6 +56,9 @@ void assert_state_list_append(t_assert_type type, t_assert_data *data, int label
 	return ;
 }
 
+/**
+ * Prints node data based on node type
+ */
 void	assert_state_list_print()
 {
 	t_assert_state	*state = assert_state_get();

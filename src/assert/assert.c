@@ -2,8 +2,7 @@
 
 /**
  * Main function to create an assert
- * @param type assert type
- * @param data pointer to a struct with data which is checked for assertion
+ *
  * Currently availible types are int and char**
  */
 void	assert(t_assert_type type, t_assert_data *data)

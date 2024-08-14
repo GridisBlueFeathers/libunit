@@ -3,8 +3,8 @@
 
 void	assert_int_equal_node_print(t_assert_node *node)
 {
-	int exp = ((t_assert_data_int *)node->data)->exp;
-	int res = ((t_assert_data_int *)node->data)->res;
+	int exp = ((t_assert_int_data *)node->data)->exp;
+	int res = ((t_assert_int_data *)node->data)->res;
 
 	printf("%d. %d is not equal %d\n", node->label, res, exp);
 }

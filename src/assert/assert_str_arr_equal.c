@@ -2,7 +2,7 @@
 #include "libft/color.h"
 #include "libft/libft.h"
 
-void	assert_str_arr_equal_data_free(t_assert_data_str_arr *data)
+void	assert_str_arr_equal_data_free(t_assert_str_arr_data *data)
 {
 	int i = 0;
 	ft_free(STR_ARR, data->res);
@@ -10,11 +10,11 @@ void	assert_str_arr_equal_data_free(t_assert_data_str_arr *data)
 	free(data);
 }
 
-t_assert_data_str_arr	*assert_str_arr_equal_data_dup(t_assert_data *data)
+t_assert_str_arr_data	*assert_str_arr_equal_data_dup(t_assert_data *data)
 {
-	t_assert_data_str_arr *res;
+	t_assert_str_arr_data *res;
 
-	res = (t_assert_data_str_arr *)calloc(1, sizeof(t_assert_data_str_arr));
+	res = (t_assert_str_arr_data *)calloc(1, sizeof(t_assert_str_arr_data));
 	if (!res)
 		return (NULL);
 	int exp_arr_len = 0;
@@ -51,8 +51,8 @@ t_assert_data_str_arr	*assert_str_arr_equal_data_dup(t_assert_data *data)
 
 void	assert_str_arr_equal_node_print(t_assert_node *node)
 {
-	char **exp = ((t_assert_data_str_arr *)node->data)->exp;
-	char **res = ((t_assert_data_str_arr *)node->data)->res;
+	char **exp = ((t_assert_str_arr_data *)node->data)->exp;
+	char **res = ((t_assert_str_arr_data *)node->data)->res;
 
 	printf("{");
 	int i = 0;

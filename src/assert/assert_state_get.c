@@ -1,21 +1,8 @@
 #include "libunit/assert.h"
 
-void	assert_state_reset()
-{
-	t_assert_state *state = assert_state_get();
-
-	state->label = 0;
-	if (!state->head)
-		return ;
-	while (state->head)
-	{
-		state->tail = state->head->next;
-		assert_state_node_free(state->head);
-		state->head = state->tail;
-	}
-	state->fail_amount = 0;
-}
-
+/**
+ * Allocates memory and sets initial values to state
+ */
 t_assert_state *assert_state_init()
 {
 	t_assert_state *state;
@@ -34,6 +21,11 @@ t_assert_state *assert_state_init()
 	return (state);
 }
 
+/**
+ * If state exists already, returns it
+ *
+ * If state doesn't exist, initializes it and returns it
+ */
 t_assert_state *assert_state_get()
 {
 	static t_assert_state *state = NULL;
