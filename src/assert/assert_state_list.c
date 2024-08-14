@@ -40,6 +40,7 @@ void assert_state_list_append(t_assert_type type, t_assert_data *data, int label
 	if (!new->data)
 	{
 		dprintf(STDERR_FILENO, "Assert data allocation failed\n");
+		free(new);
 		exit(1);
 	}
 	new->type = type;
