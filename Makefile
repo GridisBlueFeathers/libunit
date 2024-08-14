@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/07/30 15:43:53 by svereten         ###   ########.fr        #
+#    Updated: 2024/08/14 15:31:42 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -24,7 +24,8 @@ RUNNERS_DIR = ../run
 TESTS_DIR = ../tests
 
 SRCS = assert/assert \
-	   assert/assert_int_equal \
+	   assert/int/asserts/equal \
+	   assert/int/data_dup \
 	   assert/assert_state_get \
 	   assert/assert_state_free \
 	   assert/assert_state_list \

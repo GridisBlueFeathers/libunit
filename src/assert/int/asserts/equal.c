@@ -1,18 +1,6 @@
 #include "libunit/assert.h"
 #include "libft/color.h"
 
-t_assert_data_int	*assert_int_equal_data_dup(t_assert_data *data)
-{
-	t_assert_data_int *res;
-
-	res = (t_assert_data_int *)calloc(1, sizeof(t_assert_data_int));
-	if (!res)
-		return (NULL);
-	res->exp = *((int *)data->exp);
-	res->res = *((int *)data->res);
-	return (res);
-}
-
 void	assert_int_equal_node_print(t_assert_node *node)
 {
 	int exp = ((t_assert_data_int *)node->data)->exp;

@@ -58,8 +58,8 @@ void	assert_state_node_free(t_assert_node *node);
 void			assert_state_reset();
 t_assert_state	*assert_state_get();
 
+t_assert_data_int	*assert_data_int_dup(t_assert_data *data);
 void				assert_int_equal(t_assert_data *data);
-t_assert_data_int	*assert_int_equal_data_dup(t_assert_data *data);
 void				assert_int_equal_node_print(t_assert_node *node);
 
 void	assert_str_arr_equal(t_assert_data *data);

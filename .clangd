@@ -1,2 +1,15 @@
 CompileFlags:
-  Add: [-I../include, -I../../include, -I../libft/include, -I../../libft/include]
+  Add: [
+    -I../include,
+    -I../../include,
+    -I../../../include,
+    -I../../../../include,
+    -I../libft/include,
+    -I../../libft/include,
+    -I../../../libft/include,
+    -I../../../../libft/include,
+    -I../libunit/include,
+    -I../../libunit/include
+    -I../../../libunit/include,
+    -I../../../../libunit/include
+  ]
