@@ -7,7 +7,6 @@
  */
 void	assert_str_arr_equal_data_free(t_assert_str_arr_data *data)
 {
-	int i = 0;
 	ft_free(STR_ARR, data->res);
 	ft_free(STR_ARR, data->exp);
 	free(data);
