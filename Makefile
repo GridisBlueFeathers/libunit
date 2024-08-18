@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/08/14 15:31:42 by svereten         ###   ########.fr        #
+#    Updated: 2024/08/18 15:36:52 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -39,6 +39,7 @@ TESTS_OBJS = ${patsubst ../tests/%.c, ../obj/%.o, ${wildcard ../tests/*.c}}
 OBJS = ${SRCS:%=${OBJS_DIR}/%.o}
 
 OBJ_DIRS = ${sort ${dir ${OBJS}}}
+PROJECT_OBJS_DIRS = ${sort ${dir ${PROJECT_OBJS}}}
 RUNNERS_DIRS = ${sort ${dir ${patsubst ../tests/%.c, ../run/%, ${shell find ../tests/ -type f -name "*.c"}}}}
 
 LIBFT = ${LIBFT_DIR}/libft.a
@@ -73,13 +74,13 @@ ${LIBFT}:
 ../obj/%.o:
 	${MAKE} -C ../ obj/$*.o
 
-${RUNNERS_DIR}/%: ../obj/%.o ${PROJECT_OBJS} ${NAME} ${LIBFT} | ${RUNNERS_DIRS}
+${RUNNERS_DIR}/%: ${PROJECT_OBJS} ${NAME} ${LIBFT} | ${RUNNERS_DIRS}
 	${CC} ${CFLAGS} ${PROJECT_INCLUDE} ${INCLUDE} $^ -o $@
 	
 ${RUNNERS_DIRS}:
 	mkdir -p $@
 
-../obj:
+${PROJECT_OBJS_DIRS}:
 	mkdir -p $@
 
 print:
