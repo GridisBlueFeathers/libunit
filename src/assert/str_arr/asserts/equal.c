@@ -2,6 +2,9 @@
 #include "libft/color.h"
 #include <string.h>
 
+/**
+ * Prints both string arrays of a corresponding assert
+ */
 void	assert_str_arr_equal_node_print(t_assert_node *node)
 {
 	char **exp = ((t_assert_str_arr_data *)node->data)->exp;
@@ -24,6 +27,9 @@ void	assert_str_arr_equal_node_print(t_assert_node *node)
 	printf("\"%s\"}\n", exp[i]);
 }
 
+/**
+ * Compares every string in two string arrays, asserts ok if every string is equal
+ */
 void	assert_str_arr_equal(t_assert_data *data)
 {
 	char **res = data->res;

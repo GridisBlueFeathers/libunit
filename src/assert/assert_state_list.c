@@ -12,10 +12,10 @@ void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
 		case INT_EQUAL:
 			res = (void *)assert_int_data_dup(data);
 			break ;
-		case STR_EQUAL:
-			res = NULL;
-			break ;
 		case STR_ARR_EQUAL:
+			res = (void *)assert_str_arr_equal_data_dup(data);
+			break ;
+		case STR_EQUAL:
 			res = NULL;
 			break ;
 	}
@@ -79,6 +79,7 @@ void	assert_state_list_print()
 			case STR_EQUAL:
 				break ;
 			case STR_ARR_EQUAL:
+				assert_str_arr_equal_node_print(cur);
 				break ;
 		}
 		cur = temp;
