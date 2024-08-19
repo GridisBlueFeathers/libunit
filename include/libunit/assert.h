@@ -48,6 +48,7 @@ typedef struct s_assert_state
 }	t_assert_state;
 
 void	assert(t_assert_type type, t_assert_data *data);
+void	assert_not_supported();
 
 t_assert_state	*assert_state_get();
 

@@ -1,5 +1,10 @@
 #include "libunit/assert.h"
 
+void	assert_not_supported()
+{
+	printf("This type of assert is not supported yet\n");
+}
+
 /**
  * Main function to create an assert
  *
@@ -15,6 +20,7 @@ void	assert(t_assert_type type, t_assert_data *data)
 			assert_str_arr_equal(data);
 			break ;
 		case STR_EQUAL:
+			assert_not_supported();
 			break ;
 	}
 }
