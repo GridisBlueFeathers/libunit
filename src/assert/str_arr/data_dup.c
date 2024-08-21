@@ -22,8 +22,8 @@ t_assert_str_arr_data	*assert_str_arr_equal_data_dup(t_assert_data *data)
 	res = (t_assert_str_arr_data *)calloc(1, sizeof(t_assert_str_arr_data));
 	if (!res)
 		return (NULL);
-	res->exp = ft_strarrdup(data->exp);
-	res->res = ft_strarrdup(data->res);
+	res->exp = ft_strarrdup((char **)data->exp);
+	res->res = ft_strarrdup((char **)data->res);
 	if (!res->exp || !res->res)
 		return (NULL);
 	return (res);
