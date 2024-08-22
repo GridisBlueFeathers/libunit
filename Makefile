@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/08/18 15:46:00 by svereten         ###   ########.fr        #
+#    Updated: 2024/08/22 14:54:14 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -66,6 +66,7 @@ fclean: clean
 	rm -rf ${NAME}
 
 re: fclean all
+	${MAKE} re -C ${LIBFT_DIR}
 
 ${LIBFT}:
 	${MAKE} -C ${LIBFT_DIR}
