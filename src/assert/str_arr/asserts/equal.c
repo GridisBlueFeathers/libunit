@@ -1,5 +1,6 @@
 #include "libunit/assert.h"
 #include "libft/color.h"
+#include "libft/libft.h"
 #include <string.h>
 
 /**
