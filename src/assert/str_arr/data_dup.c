@@ -25,6 +25,10 @@ t_assert_str_arr_data	*assert_str_arr_equal_data_dup(t_assert_data *data)
 	res->exp = ft_strarrdup((char **)data->exp);
 	res->res = ft_strarrdup((char **)data->res);
 	if (!res->exp || !res->res)
+	{
+		assert_str_arr_equal_data_free(res);
+		res = NULL;
 		return (NULL);
+	}
 	return (res);
 }

@@ -51,6 +51,11 @@ void	assert_str_arr_equal(t_assert_data *data)
 	int check = 1;
 
 	state->label++;
+	if (data->failed)
+	{
+		printf("Original function failed unexpectedly, exiting...\n");
+		exit(1);
+	}
 	while (res && exp && res[i] && exp[i]) {
 		if ((!res[i] && exp[i]) || (res[i] && !exp[i]) || strcmp(res[i], exp[i])) {
 			check = 0;

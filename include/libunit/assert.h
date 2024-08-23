@@ -14,8 +14,9 @@ typedef enum e_assert_type
 
 typedef struct s_assert_data
 {
-	void *exp;
-	void *res;
+	void	*exp;
+	void	*res;
+	int		failed;
 }	t_assert_data;
 
 typedef struct s_assert_int_data
