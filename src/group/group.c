@@ -1,26 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "libunit/group.h"
-
-t_groups_state	*groups_state_init() {
-	t_groups_state *state = (t_groups_state *)calloc(1, sizeof(t_groups_state));
-	if (!state)
-	{
-		dprintf(STDERR_FILENO, "Groups state allocation failed");
-		exit(1);
-	}
-	return (state);
-}
-
-t_groups_state	*groups_state_get() {
-	static t_groups_state	*groups_state;
-
-	if (!groups_state)
-		groups_state = groups_state_init();
-	return (groups_state);
-}
 
 t_group	*group_get(char *group_name) {
 	t_group	*cur = groups_state_get()->head;
@@ -44,17 +22,6 @@ t_group	*group_add(char *group_name) {
 	return (new_group);
 }
 
-t_group_node	*group_node_init(char *desc, void (*test)(void)) {
-	t_group_node	*new_group_node = (t_group_node *)calloc(1, sizeof(t_group_node));
-
-	if (!new_group_node) {
-		dprintf(STDERR_FILENO, "Group node allocation failed");
-		exit(1);
-	}
-	new_group_node->desc = desc;
-	new_group_node->test = test;
-	return (new_group_node);
-}
 
 void	group_add_test(char *group_name, char *desc, void (*test)(void))
 {
