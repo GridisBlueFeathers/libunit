@@ -70,7 +70,7 @@ void				assert_int_equal_node_print(t_assert_node *node);
 
 void					assert_str_arr_equal(t_assert_data *data);
 void					assert_str_arr_equal_node_print(t_assert_node *node);
-t_assert_str_arr_data	*assert_str_arr_equal_data_dup(t_assert_data *data);
-void					assert_str_arr_equal_data_free(t_assert_str_arr_data *data);
+t_assert_str_arr_data	*assert_str_arr_data_dup(t_assert_data *data);
+void					assert_str_arr_data_free(t_assert_str_arr_data *data);
 
 #endif

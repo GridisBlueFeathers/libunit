@@ -14,7 +14,7 @@ void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
 			res = (void *)assert_int_data_dup(data);
 			break ;
 		case STR_ARR_EQUAL:
-			res = (void *)assert_str_arr_equal_data_dup(data);
+			res = (void *)assert_str_arr_data_dup(data);
 			break ;
 		case STR_EQUAL:
 			res = NULL;

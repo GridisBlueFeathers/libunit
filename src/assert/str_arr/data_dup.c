@@ -5,7 +5,7 @@
 /**
  * Frees duplicated data of string arrays
  */
-void	assert_str_arr_equal_data_free(t_assert_str_arr_data *data)
+void	assert_str_arr_data_free(t_assert_str_arr_data *data)
 {
 	ft_free(STR_ARR, &(data->res));
 	ft_free(STR_ARR, &(data->exp));
@@ -15,7 +15,7 @@ void	assert_str_arr_equal_data_free(t_assert_str_arr_data *data)
 /**
  * Duplicates data of string arrays to use later in outputting differences
  */
-t_assert_str_arr_data	*assert_str_arr_equal_data_dup(t_assert_data *data)
+t_assert_str_arr_data	*assert_str_arr_data_dup(t_assert_data *data)
 {
 	t_assert_str_arr_data *res;
 
@@ -26,7 +26,7 @@ t_assert_str_arr_data	*assert_str_arr_equal_data_dup(t_assert_data *data)
 	res->res = ft_strarrdup((char **)data->res);
 	if (!res->exp || !res->res)
 	{
-		assert_str_arr_equal_data_free(res);
+		assert_str_arr_data_free(res);
 		free(res);
 		res = NULL;
 		return (NULL);
