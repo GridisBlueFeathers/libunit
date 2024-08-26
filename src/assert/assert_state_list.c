@@ -37,8 +37,9 @@ void assert_state_list_append(t_assert_type type, t_assert_data *data, int label
 		dprintf(STDERR_FILENO, "Assert fail message allocation failed\n");
 		exit(1);
 	}
-	new->data = assert_state_list_get_data(type, data);
-	if (!new->data)
+	if (!data->fn_failed)
+		new->data = assert_state_list_get_data(type, data);
+	if (!new->data && data->fn_failed)
 	{
 		dprintf(STDERR_FILENO, "Assert data allocation failed\n");
 		free(new);
