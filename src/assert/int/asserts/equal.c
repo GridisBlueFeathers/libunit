@@ -17,10 +17,10 @@ void	assert_int_equal(t_assert_data *data)
 
 	state->label++;
 	if (res == exp)
-	{
-		printf(CLR CLR_GREEN_FG CLR_END "[%d.ASSERT_OK] " CLR_RESET, state->label);
-		return ;
-	}
-	printf(CLR CLR_RED_FG CLR_END"[%d.ASSERT_KO] " CLR_RESET, state->label);
+		data->succeed = 1;
+	else
+		data->succeed = 0;
+	if (data->fn_failed)
+		data->succeed = 0;
 	assert_state_list_append(INT_EQUAL, data, state->label);
 }

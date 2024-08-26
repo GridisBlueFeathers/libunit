@@ -2,6 +2,7 @@
 
 t_group	*group_get(char *group_name) {
 	t_group	*cur = groups_state_get()->head;
+
 	while (cur) {
 		if (strcmp(cur->group_name, group_name))
 			return (cur);
@@ -29,10 +30,10 @@ void	group_add_test(char *group_name, char *desc, void (*test)(void))
 
 	if (!group) {
 		group = group_add(group_name);
-		group->head = group_node_init(desc, test);
+		group->head = group_test_init(desc, test);
 		group->tail = group->head;
 		return ;
 	}
-	group->tail->next = group_node_init(desc, test);
+	group->tail->next = group_test_init(desc, test);
 	group->tail = group->tail->next;
 }

@@ -1,4 +1,5 @@
 #include "libunit/assert.h"
+#include "libft/color.h"
 
 /**
  * Duplicates data to display it later
@@ -45,7 +46,10 @@ void assert_state_list_append(t_assert_type type, t_assert_data *data, int label
 	}
 	new->type = type;
 	new->label = label;
-	state->fail_amount++;
+	new->fn_failed = data->fn_failed;
+	new->succeed = data->succeed;
+	if (!new->succeed || new->fn_failed)
+		state->fail_amount++;
 	if (!state->tail)
 	{
 		state->tail = new;
@@ -58,30 +62,22 @@ void assert_state_list_append(t_assert_type type, t_assert_data *data, int label
 }
 
 /**
- * Prints node data based on node type
+ * Prints [ASSERT_OK] and other bages
  */
-void	assert_state_list_print()
+void	assert_state_list_print_bages(t_assert_state *state)
 {
-	t_assert_state	*state = assert_state_get();
-	t_assert_node	*cur;
-	t_assert_node	*temp;
+	t_assert_node *cur = state->head;
 
-	printf("Errors:\n");
-	cur = state->head;
 	while (cur)
 	{
-		temp = cur->next;
-		switch (cur->type)
-		{
-			case INT_EQUAL:
-				assert_int_equal_node_print(cur);
-				break ;
-			case STR_EQUAL:
-				break ;
-			case STR_ARR_EQUAL:
-				assert_str_arr_equal_node_print(cur);
-				break ;
-		}
-		cur = temp;
+		if (cur->succeed)
+			printf(CLR CLR_GREEN_FG CLR_END "[%d.ASSERT_OK] " CLR_RESET, cur->label);
+		else if (cur->fn_failed)
+			printf(CLR CLR_RED_FG CLR_END "[%d.ASSERT_FAIL] " CLR_RESET, cur->label);
+		else
+			printf(CLR CLR_RED_FG CLR_END "[%d.ASSERT_KO] " CLR_RESET, cur->label);
+		cur = cur->next;
 	}
+	printf("\n");
 }
+

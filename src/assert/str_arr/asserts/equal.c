@@ -11,32 +11,9 @@ void	assert_str_arr_equal_node_print(t_assert_node *node)
 	char **exp = ((t_assert_str_arr_data *)node->data)->exp;
 	char **res = ((t_assert_str_arr_data *)node->data)->res;
 
-	int i = 0;
-	if (res)
-	{
-		printf("{");
-		while (res[i])
-		{
-			printf("\"%s\", ", res[i]);
-			i++;
-		}
-		printf("\"%s\"} is not equal ", res[i]);
-	}
-	else
-		printf("NULL is not equal ");
-	i = 0;
-	if (exp)
-	{
-		printf("{");
-		while (exp[i])
-		{
-			printf("\"%s\", ", exp[i]);
-			i++;
-		}
-		printf("\"%s\"}\n", exp[i]);
-	}
-	else
-		printf("NULL\n");
+	ft_putstrarr_fd(res, STDOUT_FILENO);
+	write(STDOUT_FILENO, " is not equal ", strlen(" is not equal "));
+	ft_putstrarr_fd(exp, STDOUT_FILENO);
 }
 
 /**
@@ -51,11 +28,6 @@ void	assert_str_arr_equal(t_assert_data *data)
 	int check = 1;
 
 	state->label++;
-	if (data->failed)
-	{
-		printf("Original function failed unexpectedly, exiting...\n");
-		exit(1);
-	}
 	while (res && exp && res[i] && exp[i]) {
 		if ((!res[i] && exp[i]) || (res[i] && !exp[i]) || strcmp(res[i], exp[i])) {
 			check = 0;
@@ -65,10 +37,8 @@ void	assert_str_arr_equal(t_assert_data *data)
 	}
 	if ((!res && exp) || (res && !exp))
 		check = 0;
-	if (check) {
-		printf(CLR CLR_GREEN_FG CLR_END "[%d.ASSERT_OK] " CLR_RESET, state->label);
-		return ;
-	}
-	printf(CLR CLR_RED_FG CLR_END"[%d.ASSERT_KO] " CLR_RESET, state->label);
+	data->succeed = check;
+	if (data->fn_failed)
+		data->succeed = 0;
 	assert_state_list_append(STR_ARR_EQUAL, data, state->label);
 }

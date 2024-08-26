@@ -5,6 +5,11 @@ void	assert_not_supported()
 	printf("This type of assert is not supported yet\n");
 }
 
+void	assert_function_failed()
+{
+	printf("Original function failed\n");
+}
+
 /**
  * Main function to create an assert
  *

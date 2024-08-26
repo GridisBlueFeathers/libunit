@@ -16,28 +16,31 @@ typedef struct s_assert_data
 {
 	void	*exp;
 	void	*res;
-	int		failed;
+	int		fn_failed;
+	int		succeed;
 }	t_assert_data;
 
 typedef struct s_assert_int_data
 {
-	int	exp;
-	int	res;
+	int		exp;
+	int		res;
 }	t_assert_int_data;
 
 typedef struct s_assert_str_arr_data
 {
-	char **exp;
-	char **res;
+	char	**exp;
+	char	**res;
 }	t_assert_str_arr_data;
 
 typedef struct s_assert_node
 {
 
-	int							label;
-	void						*data;
-	t_assert_type				type;
-	struct s_assert_node		*next;
+	int						label;
+	int						succeed;
+	int						fn_failed;
+	void					*data;
+	t_assert_type			type;
+	struct s_assert_node	*next;
 }	t_assert_node;
 
 typedef struct s_assert_state
@@ -50,11 +53,12 @@ typedef struct s_assert_state
 
 void	assert(t_assert_type type, t_assert_data *data);
 void	assert_not_supported();
+void	assert_function_failed();
 
 t_assert_state	*assert_state_get();
 
 void	assert_state_list_append(t_assert_type type, t_assert_data *data, int label);
-void	assert_state_list_print();
+void	assert_state_list_print_bages(t_assert_state *state);
 
 void	assert_state_free();
 void	assert_state_reset();
