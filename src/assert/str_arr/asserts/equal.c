@@ -25,18 +25,9 @@ void	assert_str_arr_equal(t_assert_data *data)
 	char **exp = (char **)data->exp;
 	t_assert_state *state = assert_state_get();
 	int i = 0;
-	int check = 1;
 
 	state->label++;
-	while (res && exp && res[i] && exp[i]) {
-		if ((!res[i] && exp[i]) || (res[i] && !exp[i]) || strcmp(res[i], exp[i])) {
-			check = 0;
-			break ;
-		}
-		i++;
-	}
-	if ((!res && exp) || (res && !exp))
-		check = 0;
+	check = ft_strarr
 	data->succeed = check;
 	if (data->fn_failed)
 		data->succeed = 0;
