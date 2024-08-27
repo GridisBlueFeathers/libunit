@@ -7,8 +7,10 @@
  */
 void	assert_str_arr_data_free(t_assert_str_arr_data *data)
 {
-	ft_free(STR_ARR, &(data->res));
-	ft_free(STR_ARR, &(data->exp));
+	if (data->exp)
+		ft_free(STR_ARR, &(data->exp));
+	if (data->res)
+		ft_free(STR_ARR, &(data->res));
 	free(data);
 }
 
@@ -27,8 +29,6 @@ t_assert_str_arr_data	*assert_str_arr_data_dup(t_assert_data *data)
 	if (!res->exp || !res->res)
 	{
 		assert_str_arr_data_free(res);
-		free(res);
-		res = NULL;
 		return (NULL);
 	}
 	return (res);

@@ -5,7 +5,7 @@
 /**
  * Duplicates data to display it later
  */
-t_assert_data	*assert_node_dup_data(t_assert_type type, t_assert_data *data)
+t_assert_data	*assert_node_data_dup(t_assert_type type, t_assert_data *data)
 {
 	t_assert_data	*res;
 
@@ -32,7 +32,7 @@ t_assert_node	*assert_node_new(t_assert_type type, t_assert_data *data, int labe
 		exit(1);
 	}
 	if (!data->fn_failed)
-		new->data = assert_node_dup_data(type, data);
+		new->data = assert_node_data_dup(type, data);
 	if (!new->data && !data->fn_failed) {
 		dprintf(STDERR_FILENO, "Assert data duplication failed\n");
 		ft_free(STRUCT, &new);
