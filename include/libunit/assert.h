@@ -38,7 +38,7 @@ typedef struct s_assert_node
 	int						label;
 	int						succeed;
 	int						fn_failed;
-	void					*data;
+	t_assert_data			*data;
 	t_assert_type			type;
 	struct s_assert_node	*next;
 }	t_assert_node;

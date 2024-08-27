@@ -1,20 +1,20 @@
+#include "libft/libft.h"
 #include "libunit/assert.h"
 #include "libft/color.h"
 
 /**
  * Duplicates data to display it later
  */
-void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
+t_assert_data	*assert_node_dup_data(t_assert_type type, t_assert_data *data)
 {
-	void	*res;
+	t_assert_data	*res;
 
-	switch(type)
-	{
+	switch(type) {
 		case INT_EQUAL:
-			res = (void *)assert_int_data_dup(data);
+			res = (t_assert_data *)assert_int_data_dup(data);
 			break ;
 		case STR_ARR_EQUAL:
-			res = (void *)assert_str_arr_data_dup(data);
+			res = (t_assert_data *)assert_str_arr_data_dup(data);
 			break ;
 		case STR_EQUAL:
 			res = NULL;
@@ -23,32 +23,36 @@ void	*assert_state_list_get_data(t_assert_type type, t_assert_data *data)
 	return (res);
 }
 
-/**
- * Adds new node to the state list and puts it to the end
- */
-void assert_state_list_append(t_assert_type type, t_assert_data *data, int label)
+t_assert_node	*assert_node_new(t_assert_type type, t_assert_data *data, int label)
 {
-	t_assert_node	*new;
-	t_assert_state	*state = assert_state_get();
+	t_assert_node	*new = (t_assert_node *)calloc(1, sizeof(t_assert_node));
 
-	new = (t_assert_node *)calloc(1, sizeof(t_assert_node));
-	if (!new)
-	{
-		dprintf(STDERR_FILENO, "Assert fail message allocation failed\n");
+	if (!new) {
+		dprintf(STDERR_FILENO, "Assert node allocation failed\n");
 		exit(1);
 	}
 	if (!data->fn_failed)
-		new->data = assert_state_list_get_data(type, data);
-	if (!new->data && data->fn_failed)
-	{
-		dprintf(STDERR_FILENO, "Assert data allocation failed\n");
-		free(new);
+		new->data = assert_node_dup_data(type, data);
+	if (!new->data && !data->fn_failed) {
+		dprintf(STDERR_FILENO, "Assert data duplication failed\n");
+		ft_free(STRUCT, &new);
 		exit(1);
 	}
 	new->type = type;
 	new->label = label;
 	new->fn_failed = data->fn_failed;
 	new->succeed = data->succeed;
+	return (new);
+}
+
+/**
+ * Adds new node to the state list and puts it to the end
+ */
+void assert_state_list_append(t_assert_type type, t_assert_data *data, int label)
+{
+	t_assert_node	*new = assert_node_new(type, data, label);
+	t_assert_state	*state = assert_state_get();
+
 	if (!new->succeed || new->fn_failed)
 		state->fail_amount++;
 	if (!state->tail)

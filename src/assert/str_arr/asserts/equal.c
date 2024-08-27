@@ -24,10 +24,9 @@ void	assert_str_arr_equal(t_assert_data *data)
 	char **res = (char **)data->res;
 	char **exp = (char **)data->exp;
 	t_assert_state *state = assert_state_get();
-	int i = 0;
 
 	state->label++;
-	check = ft_strarrcmp();
+	int check = ft_strarrcmp(res, exp);
 	data->succeed = check;
 	if (data->fn_failed)
 		data->succeed = 0;

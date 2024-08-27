@@ -13,7 +13,7 @@ void	assert_state_node_free(t_assert_node *node)
 		case STR_EQUAL:
 			break ;
 		case STR_ARR_EQUAL:
-			assert_str_arr_data_free(node->data);
+			assert_str_arr_data_free((t_assert_str_arr_data *)node->data);
 			break ;
 	}
 	free(node);
