@@ -1,10 +1,29 @@
 #include "libunit/group.h"
 
+void	group_free(t_group *group) {
+	t_group_test *test_cur;
+	t_group_test *test_tmp;
+
+	free(group->name);
+	if (!group->head) {
+		free(group);
+		return ;
+	}
+	test_cur = group->head;
+	while (test_cur) {
+		test_tmp = test_cur->next;
+		free(test_cur->desc);
+		free(test_cur);
+		test_cur = test_tmp;
+	}
+	free(group);
+}
+
 t_group	*group_get(char *group_name) {
 	t_group	*cur = groups_state_get()->head;
 
 	while (cur) {
-		if (strcmp(cur->group_name, group_name))
+		if (strcmp(cur->name, group_name))
 			return (cur);
 		cur = cur->next;
 	}

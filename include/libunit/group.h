@@ -13,7 +13,7 @@ typedef struct s_group_test {
 } t_group_test;
 
 typedef struct s_group {
-	char			*group_name;
+	char			*name;
 	t_group_test	*head;
 	t_group_test	*tail;
 	struct s_group	*next;
@@ -30,5 +30,6 @@ t_groups_state	*groups_state_init();
 t_groups_state	*groups_state_get();
 
 t_group_test	*group_test_init(char *desc, void (*test)(void));
+void			group_free(t_group *group);
 
 #endif // !GROUP_H

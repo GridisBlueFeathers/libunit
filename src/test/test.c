@@ -7,32 +7,29 @@ void	test_print_assert_state()
 {
 	t_assert_state	*state = assert_state(GET);
 	t_assert_node	*cur;
-	t_assert_node	*temp;
 
 	assert_state_list_print_bages(state);
 	if (!state->fail_amount)
 		return ;
 	cur = state->head;
+	if (cur->fn_failed) {
+		assert_function_failed();
+		return ;
+	}
 	while (cur)
 	{
-		temp = cur->next;
-		if (cur->fn_failed)
-			assert_function_failed();
-		else
+		switch (cur->type)
 		{
-			switch (cur->type)
-			{
-				case INT_EQUAL:
-					assert_int_equal_node_print(cur);
-					break ;
-				case STR_EQUAL:
-					break ;
-				case STR_ARR_EQUAL:
-					assert_str_arr_equal_node_print(cur);
-					break ;
-			}
+			case INT_EQUAL:
+				assert_int_equal_node_print(cur);
+				break ;
+			case STR_EQUAL:
+				break ;
+			case STR_ARR_EQUAL:
+				assert_str_arr_equal_node_print(cur);
+				break ;
 		}
-		cur = temp;
+		cur = cur->next;
 	}
 }
 
