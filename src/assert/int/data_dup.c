@@ -1,4 +1,4 @@
-#include "libunit/assert.h"
+#include "libunit/assert_state.h"
 
 t_assert_int_data	*assert_int_data_dup(t_assert_data *data)
 {

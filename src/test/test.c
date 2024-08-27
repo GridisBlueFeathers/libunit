@@ -1,11 +1,11 @@
-#include "libunit/assert.h"
+#include "libunit/assert_state.h"
 
 /**
  * Prints node data based on node type
  */
 void	test_print_assert_state()
 {
-	t_assert_state	*state = assert_state_get();
+	t_assert_state	*state = assert_state(GET);
 	t_assert_node	*cur;
 	t_assert_node	*temp;
 
@@ -38,7 +38,8 @@ void	test_print_assert_state()
 
 void	test(void (*test_case)(void), char *desc)
 {
-	assert_state_reset();
+	assert_state(GET);
+	assert_state(RESET);
 	printf("Testing: %s\n", desc);
 	test_case();
 	printf("\n");

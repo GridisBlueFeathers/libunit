@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/08/27 16:31:12 by svereten         ###   ########.fr        #
+#    Updated: 2024/08/27 18:21:53 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -28,8 +28,8 @@ SRCS = assert/assert \
 	   assert/int/data_dup \
 	   assert/str_arr/asserts/equal \
 	   assert/str_arr/data_dup \
-	   assert/assert_state_get \
-	   assert/assert_state_free \
+	   assert/assert_state \
+	   assert/assert_node \
 	   assert/assert_state_list \
 	   test/test \
 	   start_up \

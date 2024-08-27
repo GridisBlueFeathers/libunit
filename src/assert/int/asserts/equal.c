@@ -1,5 +1,4 @@
-#include "libunit/assert.h"
-#include "libft/color.h"
+#include "libunit/assert_state.h"
 
 void	assert_int_equal_node_print(t_assert_node *node)
 {
@@ -13,7 +12,7 @@ void	assert_int_equal(t_assert_data *data)
 {
 	int res = *((int *)data->res);
 	int exp = *((int *)data->exp);
-	t_assert_state *state = assert_state_get();
+	t_assert_state *state = assert_state(GET);
 
 	state->label++;
 	if (res == exp)

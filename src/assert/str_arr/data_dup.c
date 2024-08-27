@@ -1,6 +1,5 @@
-#include "libunit/assert.h"
+#include "libunit/assert_state.h"
 #include "libft/libft.h"
-#include <string.h>
 
 /**
  * Frees duplicated data of string arrays

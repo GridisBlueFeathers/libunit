@@ -1,7 +1,5 @@
-#include "libunit/assert.h"
-#include "libft/color.h"
+#include "libunit/assert_state.h"
 #include "libft/libft.h"
-#include <string.h>
 
 /**
  * Prints both string arrays of a corresponding assert
@@ -23,7 +21,7 @@ void	assert_str_arr_equal(t_assert_data *data)
 {
 	char **res = (char **)data->res;
 	char **exp = (char **)data->exp;
-	t_assert_state *state = assert_state_get();
+	t_assert_state *state = assert_state(GET);
 
 	state->label++;
 	int check = ft_strarrcmp(res, exp);
