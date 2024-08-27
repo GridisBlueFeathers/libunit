@@ -27,7 +27,7 @@ void	assert_str_arr_equal(t_assert_data *data)
 	int i = 0;
 
 	state->label++;
-	check = ft_strarr
+	check = ft_strarrcmp();
 	data->succeed = check;
 	if (data->fn_failed)
 		data->succeed = 0;
