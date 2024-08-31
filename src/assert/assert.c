@@ -17,7 +17,6 @@ void	assert_function_failed()
  */
 void	assert(t_assert_type type, t_assert_data *data)
 {
-	printf("Assert called\n");
 	switch (type) {
 		case INT_EQUAL:
 			assert_int_equal(data);

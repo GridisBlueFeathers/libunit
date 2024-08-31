@@ -39,6 +39,26 @@ void	assert_state_list_print_bages(t_assert_state *state)
 			printf(CLR CLR_RED_FG CLR_END "[%d.ASSERT_KO] " CLR_RESET, cur->label);
 		cur = cur->next;
 	}
-	printf("\n");
 }
 
+void	assert_state_list_print_errors(t_assert_state *state) {
+	t_assert_node	*cur = state->head;
+
+	while (cur) {
+		if (cur->succeed) {
+			cur = cur->next;
+			continue ;
+		}
+		switch (cur->type)
+		{
+			case INT_EQUAL:
+				assert_int_equal_node_print(cur);
+				break ;
+			case STR_EQUAL:
+				break ;
+			case STR_ARR_EQUAL:
+				assert_str_arr_equal_node_print(cur);
+				break ;
+		}
+	}
+}

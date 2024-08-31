@@ -6,7 +6,7 @@
 #    By: svereten <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/22 17:37:40 by svereten          #+#    #+#              #
-#    Updated: 2024/08/27 18:21:53 by svereten         ###   ########.fr        #
+#    Updated: 2024/08/29 15:48:51 by svereten         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libunit.a
@@ -32,6 +32,10 @@ SRCS = assert/assert \
 	   assert/assert_node \
 	   assert/assert_state_list \
 	   test/test \
+	   group/group \
+	   group/groups \
+	   group/groups_state \
+	   group/group_test \
 	   start_up \
 	   teardown \
 

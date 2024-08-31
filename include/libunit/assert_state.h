@@ -47,6 +47,7 @@ t_assert_state	*assert_state(t_state_action action);
 
 void	assert_state_list_append(t_assert_type type, t_assert_data *data, int label);
 void	assert_state_list_print_bages(t_assert_state *state);
+void	assert_state_list_print_errors(t_assert_state *state);
 
 void	assert_state_free();
 void	assert_state_reset(t_assert_state *state);

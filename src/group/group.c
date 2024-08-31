@@ -1,10 +1,29 @@
 #include "libunit/group.h"
 
+void	group_test_state_free(t_assert_state *state)
+{
+	t_assert_node	*node_cur;
+	t_assert_node	*node_tmp;
+
+	if (!state)
+		return ;
+	node_cur = state->head;
+	while (node_cur)
+	{
+		node_tmp = node_cur->next;
+		assert_state_node_free(node_cur);
+		node_cur = node_tmp;
+	}
+	free(state);
+}
+
+/**
+ * Frees all the memory allocated for group
+ */
 void	group_free(t_group *group) {
 	t_group_test *test_cur;
 	t_group_test *test_tmp;
 
-	free(group->name);
 	if (!group->head) {
 		free(group);
 		return ;
@@ -12,7 +31,7 @@ void	group_free(t_group *group) {
 	test_cur = group->head;
 	while (test_cur) {
 		test_tmp = test_cur->next;
-		free(test_cur->desc);
+		group_test_state_free(test_cur->test_state);
 		free(test_cur);
 		test_cur = test_tmp;
 	}
@@ -23,7 +42,7 @@ t_group	*group_get(char *group_name) {
 	t_group	*cur = groups_state_get()->head;
 
 	while (cur) {
-		if (strcmp(cur->name, group_name))
+		if (!strcmp(cur->name, group_name))
 			return (cur);
 		cur = cur->next;
 	}
@@ -37,7 +56,13 @@ t_group	*group_add(char *group_name) {
 		dprintf(STDERR_FILENO, "Group allocation failied");
 		exit(1);
 	}
-	groups_state_get()->tail->next = new_group;
+	new_group->name = group_name;
+	new_group->next = NULL;
+	if (!groups_state_get()->tail) {
+		groups_state_get()->head = new_group;
+	} else {
+		groups_state_get()->tail->next = new_group;
+	}
 	groups_state_get()->tail = new_group;
 	return (new_group);
 }

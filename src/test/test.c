@@ -9,6 +9,7 @@ void	test_print_assert_state()
 	t_assert_node	*cur;
 
 	assert_state_list_print_bages(state);
+	printf("\n");
 	if (!state->fail_amount)
 		return ;
 	cur = state->head;

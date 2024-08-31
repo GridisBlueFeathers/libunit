@@ -6,6 +6,8 @@
  */
 void	assert_str_arr_data_free(t_assert_str_arr_data *data)
 {
+	if (!data)
+		return ;
 	if (data->exp)
 		ft_free(STR_ARR, &(data->exp));
 	if (data->res)

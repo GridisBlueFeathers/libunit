@@ -27,6 +27,8 @@ t_assert_state *assert_state_init()
  */
 void	assert_state_reset(t_assert_state *state)
 {
+	if (!state)
+		return ;
 	state->label = 0;
 	state->fail_amount = 0;
 	if (!state->head)
@@ -74,7 +76,10 @@ t_assert_state *assert_state(t_state_action action)
 				return (state);
 			}
 		case (NULLIFY): {
-				ft_free(STRUCT, &state);
+				if (!state)
+					return (NULL);
+				free(state);
+				state = NULL;
 				return (NULL);
 			}
 	}
