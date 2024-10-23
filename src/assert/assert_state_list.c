@@ -60,5 +60,6 @@ void	assert_state_list_print_errors(t_assert_state *state) {
 				assert_str_arr_equal_node_print(cur);
 				break ;
 		}
+		cur = cur->next;
 	}
 }
