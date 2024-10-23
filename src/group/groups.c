@@ -33,5 +33,6 @@ void	groups_execute() {
 			assert_state_list_print_errors(group_test_cur->test_state);
 			group_test_cur = group_test_cur->next;
 		}
+		group_cur = group_cur->next;
 	}
 }
